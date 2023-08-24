@@ -32,7 +32,7 @@ public class CarWash
         }
     }
 
-    public async Task WashCar(string licensePlate)
+    public async Task WashCarAsync(string licensePlate)
     {
         CarWashSpace tempSpace = _carWashSpaces.FirstOrDefault(x => x.State == ProcessState.Free);
 

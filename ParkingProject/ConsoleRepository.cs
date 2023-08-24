@@ -58,7 +58,7 @@ public class ConsoleRepository {
         Console.ReadKey(true);
     }
 
-    public static void WashCar(ParkingLot parkingLot)
+    public static void WashCarAsync(ParkingLot parkingLot)
     {
         Console.Write("Enter license plate: ");
         string licensePlate = Console.ReadLine().ToUpper();
@@ -85,6 +85,6 @@ public class ConsoleRepository {
                 default: return;
             }
         }
-        parkingLot.CarWash.WashCar(licensePlate);
+        parkingLot.CarWash.WashCarAsync(licensePlate);
     }
 }
