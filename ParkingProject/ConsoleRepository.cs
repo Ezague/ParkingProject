@@ -27,19 +27,10 @@ public class ConsoleRepository {
 
         Console.Write("Do you want to buy a wash for your car? Y/N: ");
             ConsoleKeyInfo valg = Console.ReadKey(true);
-            switch (valg.Key)
+            if (valg.Key == ConsoleKey.Y)
             {
-                case ConsoleKey.Y:
-                    hasPurchasedCarWash = true;
-                    break;
-                case ConsoleKey.N:
-                    hasPurchasedCarWash = false;
-                    break;
-                default: 
-                    hasPurchasedCarWash = false;
-                    break;
+                hasPurchasedCarWash = true;
             }
-
         Regex rx = new(@"[A-Z]{2}\s*[0-9]{2}\s*[0-9]{3}");
 
         if (rx.IsMatch(licensePlate))
