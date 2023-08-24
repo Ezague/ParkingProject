@@ -3,6 +3,6 @@ namespace ParkingProject.Data;
 
 public interface IParkingLotRepository
 {
-    public string LeaseParkingSpace(ParkingSpaceTypes parkingSpaceTypes, string licensePlate, List<IParkingSpace> parkingSpaces);
+    public string LeaseParkingSpace(ParkingSpaceTypes parkingSpaceTypes, string licensePlate, List<IParkingSpace> parkingSpaces, bool hasPurchasedCarWash);
     public void AddParkingSpaces(List<IParkingSpace> parkingSpaces, int NumberOfSpaces);
 }

@@ -3,15 +3,17 @@ using ParkingProject.Data;
 namespace ParkingProject;
     public class ParkingLotRepository : IParkingLotRepository
     {
-        public string LeaseParkingSpace(ParkingSpaceTypes parkingSpaceTypes, string licensePlate, List<IParkingSpace> parkingSpaces)
+        public string LeaseParkingSpace(ParkingSpaceTypes parkingSpaceTypes, string licensePlate, List<IParkingSpace> parkingSpaces, bool hasPurchasedCarWash)
     {
         IParkingSpace tempspace = parkingSpaces.FirstOrDefault(x => x.Type == parkingSpaceTypes && x.IsAvailable);
         if (tempspace != null)
         {
-            tempspace.IsAvailable = false;
+            tempspace.IsAvailable = hasPurchasedCarWash;
             tempspace.TimeTaken = DateTime.Now;
             tempspace.LicensePlate = licensePlate;
-            return $"Parking space leased for: {tempspace.LicensePlate}\nYour hourly rate is: {tempspace.Price:C}\nYour parking space ID is: {tempspace.Id}";
+            tempspace.PurchasedCarWash = false;
+            string availTemp = tempspace.PurchasedCarWash ? "Not bought" : $"Bought for vehicle: {tempspace.LicensePlate}";
+            return $"Parking space leased for: {tempspace.LicensePlate}\nYour hourly rate is: {tempspace.Price:C}\nYour parking space ID is: {tempspace.Id}\nCarWash: {availTemp}";
         } else
         {
             return "No available parking spaces of that type";

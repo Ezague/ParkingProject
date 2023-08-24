@@ -21,10 +21,41 @@ public class CarWash
         Name = name;
         NumberOfSpaces = 3;
         _carWashSpaces = new List<CarWashSpace>();
+        AddCarWashSpaces(_carWashSpaces);
     }
 
-    public void WashCar()
+    public void AddCarWashSpaces(List<CarWashSpace> carWashSpaces)
     {
-        throw new NotImplementedException();
+        for (int i = 0; i < NumberOfSpaces; i++)
+        {
+            carWashSpaces.Add(new CarWashSpace(i, ProcessState.Free, 79));
+        }
+    }
+
+    public async Task WashCar(string licensePlate)
+    {
+        CarWashSpace tempSpace = _carWashSpaces.FirstOrDefault(x => x.State == ProcessState.Free);
+
+        if (tempSpace == null)
+        {
+            await Console.Out.WriteLineAsync("No free car wash spaces");
+            Console.ReadKey();
+        }
+        else
+        {
+            foreach (ProcessState state in Enum.GetValues(typeof(ProcessState)))
+            {
+                if (state != ProcessState.Free)
+                {
+                    tempSpace.State = state;
+                    await Task.Delay(2000);
+                    await Console.Out.WriteLineAsync($"Car wash space {tempSpace.Id} is now {tempSpace.State} for {licensePlate}");
+                }
+            }
+            await Task.Delay(2000);
+            tempSpace.State = ProcessState.Free;
+            await Console.Out.WriteLineAsync($"Car wash space {tempSpace.Id} is now {tempSpace.State}");
+        }
+
     }
 }

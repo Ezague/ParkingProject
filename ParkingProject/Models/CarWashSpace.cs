@@ -1,6 +1,7 @@
+using System.Diagnostics.CodeAnalysis;
 namespace ParkingProject.Models;
 
-public enum ProcessStates
+public enum ProcessState
 {
     Free,
     Prewash,
@@ -13,6 +14,15 @@ public enum ProcessStates
 public class CarWashSpace
 {
     public required int Id { get; set; }
-    public required ProcessStates State { get; set; }
+    public required ProcessState State { get; set; }
     public required decimal Price { get; set; }
+
+    [SetsRequiredMembers]
+    public CarWashSpace(int id, ProcessState state, decimal price)
+{
+    Id = id;
+    State = state;
+    Price = price;
+}
+
 }
