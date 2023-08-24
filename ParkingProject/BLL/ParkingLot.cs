@@ -30,9 +30,4 @@ public class ParkingLot
         ParkingLotRepository.AddParkingSpaces(_parkingSpaces, NumberOfSpaces);
         CarWash = new(1, "Wash if you're gay");
     }
-
-    public string LeaseParkingSpace(ParkingSpaceTypes parkingSpaceTypes, string licensePlate)
-    {
-        return ParkingLotRepository.LeaseParkingSpace(parkingSpaceTypes, licensePlate, _parkingSpaces);
-    }
 }

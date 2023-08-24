@@ -23,7 +23,7 @@ public class UnitTest1
         IParkingSpace parkingSpace = parkingLot.ParkingSpaceList.Find(x => x.Type == type && x.IsAvailable);
 
         //Act
-        string result = parkingLot.LeaseParkingSpace(type, licensePlate);
+        string result = parkingLot.ParkingLotRepository.LeaseParkingSpace(type, licensePlate, parkingLot.ParkingSpaceList);
 
         //Assert
         Assert.Equal($"Parking space leased for: {licensePlate}\nYour hourly rate is: {parkingSpace.Price:C}\nYour parking space ID is: {parkingSpace.Id}", result);

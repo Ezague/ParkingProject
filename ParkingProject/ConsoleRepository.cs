@@ -28,7 +28,7 @@ public class ConsoleRepository {
 
         if (rx.IsMatch(licensePlate))
         {
-            Console.WriteLine(parkingLot.LeaseParkingSpace(parkingSpaceTypes, licensePlate));
+            Console.WriteLine(parkingLot.ParkingLotRepository.LeaseParkingSpace(parkingSpaceTypes, licensePlate, parkingLot.ParkingSpaceList));
             Console.ReadKey(true);
         }
         else
