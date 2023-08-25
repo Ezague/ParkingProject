@@ -2,7 +2,8 @@ using System.Text.RegularExpressions;
 using ParkingProject.BLL;
 using ParkingProject.Data;
 using ParkingProject.Models;
-namespace ParkingProject;
+
+namespace ParkingProject.Repos;
 
 public class ConsoleRepository {
 
