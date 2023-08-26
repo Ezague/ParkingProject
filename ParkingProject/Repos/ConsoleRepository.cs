@@ -26,7 +26,7 @@ public class ConsoleRepository {
         int vehicleType = int.TryParse(Console.ReadLine(), out vehicleType) ? vehicleType : 0;
         ParkingSpaceTypes parkingSpaceTypes = (ParkingSpaceTypes)vehicleType;
 
-        Console.Write("Do you want to buy a wash for your car? Y/N: ");
+        Console.WriteLine("Do you want to buy a wash for your car? Y/N: ");
             ConsoleKeyInfo valg = Console.ReadKey(true);
             if (valg.Key == ConsoleKey.Y)
             {
@@ -43,6 +43,7 @@ public class ConsoleRepository {
         else
         {
             Console.WriteLine("Invalid license plate");
+            Console.ReadKey(true);
         }
     }
 

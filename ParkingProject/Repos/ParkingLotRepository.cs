@@ -11,8 +11,8 @@ namespace ParkingProject;
             tempspace.IsAvailable = hasPurchasedCarWash;
             tempspace.TimeTaken = DateTime.Now;
             tempspace.LicensePlate = licensePlate;
-            tempspace.PurchasedCarWash = false;
-            string availTemp = tempspace.PurchasedCarWash ? "Not bought" : $"Bought for vehicle: {tempspace.LicensePlate}";
+            tempspace.PurchasedCarWash = hasPurchasedCarWash;
+            string availTemp = tempspace.PurchasedCarWash ? $"Bought for vehicle: {tempspace.LicensePlate}" : "Not bought";
             return $"Parking space leased for: {tempspace.LicensePlate}\nYour hourly rate is: {tempspace.Price:C}\nYour parking space ID is: {tempspace.Id}\nCarWash: {availTemp}";
         } else
         {
