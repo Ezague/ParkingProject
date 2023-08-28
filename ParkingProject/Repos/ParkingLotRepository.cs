@@ -1,9 +1,10 @@
 using ParkingProject.Models;
 using ParkingProject.Data;
+using ParkingProject.BLL;
 namespace ParkingProject;
     public class ParkingLotRepository : IParkingLotRepository
     {
-        public string LeaseParkingSpace(ParkingSpaceTypes parkingSpaceTypes, string licensePlate, List<IParkingSpace> parkingSpaces, bool hasPurchasedCarWash)
+    public string LeaseParkingSpace(ParkingSpaceTypes parkingSpaceTypes, string licensePlate, List<IParkingSpace> parkingSpaces, bool hasPurchasedCarWash)
     {
         IParkingSpace tempspace = parkingSpaces.FirstOrDefault(x => x.Type == parkingSpaceTypes && x.IsAvailable);
         if (tempspace != null)
@@ -17,6 +18,23 @@ namespace ParkingProject;
         } else
         {
             return "No available parking spaces of that type";
+        }
+    }
+
+    public string PayLease(string licensePlate, ParkingLot parkingLot) {
+        IParkingSpace tempSpace = parkingLot.ParkingSpaceList.FirstOrDefault(x => x.LicensePlate == licensePlate);
+
+        if (tempSpace != null) {
+        TimeSpan timeTaken = DateTime.Now - (DateTime) tempSpace.TimeTaken;
+        double hours = Math.Ceiling(timeTaken.TotalHours);
+        double totalCost = hours * tempSpace.Price;
+        if (tempSpace.PurchasedCarWash) {
+            totalCost += parkingLot.CarWash.CarWashSpace.FirstOrDefault(x => x.Id == 0).Price;
+        }
+        parkingLot.ParkingSpaceList.Remove(tempSpace);
+        return $"------ {parkingLot.Name} ------\nParking paid for: {licensePlate}\nHours parked: {hours}\nFee charged: {totalCost:C}\nPaid for car wash: {tempSpace.PurchasedCarWash}\n-------------------------";
+        } else {
+        return "No such license plate";
         }
     }
 

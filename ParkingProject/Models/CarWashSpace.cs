@@ -15,10 +15,10 @@ public class CarWashSpace
 {
     public required int Id { get; set; }
     public required ProcessState State { get; set; }
-    public required decimal Price { get; set; }
+    public required double Price { get; set; }
 
     [SetsRequiredMembers]
-    public CarWashSpace(int id, ProcessState state, decimal price)
+    public CarWashSpace(int id, ProcessState state, double price)
 {
     Id = id;
     State = state;

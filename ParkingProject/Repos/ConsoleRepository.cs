@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using ParkingProject.BLL;
 using ParkingProject.Data;
@@ -13,6 +14,8 @@ public class ConsoleRepository {
             Console.WriteLine("P. Purchase parking space");
             Console.WriteLine("B. Buy car wash");
             Console.WriteLine("S. See spaces and prices");
+            Console.WriteLine("L. Pay lease");
+            Console.WriteLine("A. Admin menu");
             Console.WriteLine("X. Exit");
             Console.WriteLine("-------------------------");
         }
@@ -45,6 +48,16 @@ public class ConsoleRepository {
             Console.WriteLine("Invalid license plate");
             Console.ReadKey(true);
         }
+    }
+
+    public static void PayLease(ParkingLot parkingLot)
+    {
+        Console.Write("Enter license plate: ");
+        string licensePlate = Console.ReadLine().ToUpper();
+
+        Console.Clear();
+        Console.WriteLine(parkingLot.ParkingLotRepository.PayLease(licensePlate, parkingLot));
+        Console.ReadKey(true);
     }
 
     public static void ShowSpacesAndPrices(ParkingLot parkingLot)
@@ -88,5 +101,10 @@ public class ConsoleRepository {
             }
         }
         parkingLot.CarWash.WashCarAsync(licensePlate);
+    }
+
+    public static void PrintAdminMenu()
+    {
+
     }
 }
