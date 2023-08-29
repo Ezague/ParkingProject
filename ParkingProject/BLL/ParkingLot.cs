@@ -28,6 +28,6 @@ public class ParkingLot
         NumberOfSpaces = 20;
         _parkingSpaces = new List<IParkingSpace>();
         ParkingLotRepository.AddParkingSpaces(_parkingSpaces, NumberOfSpaces);
-        CarWash = new(1, "Wash if you're gay");
+        CarWash = new(1, "Wash if you're gay", 79);
     }
 }

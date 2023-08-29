@@ -6,6 +6,7 @@ public class CarWash
 {
     #region properties
     public required int Id { get; set; }
+    public double Price { get; set; }
     public required string Name { get; set; }
     public required int NumberOfSpaces { get; set; }
     public List<CarWashSpace> CarWashSpace { get { return _carWashSpaces; } }
@@ -15,11 +16,12 @@ public class CarWash
     private List<CarWashSpace> _carWashSpaces;
     #endregion
     [SetsRequiredMembers]
-    public CarWash(int id, string name)
+    public CarWash(int id, string name, double price)
     {
         Id = id;
         Name = name;
         NumberOfSpaces = 3;
+        Price = price;
         _carWashSpaces = new List<CarWashSpace>();
         AddCarWashSpaces(_carWashSpaces);
     }
@@ -28,7 +30,7 @@ public class CarWash
     {
         for (int i = 0; i < NumberOfSpaces; i++)
         {
-            carWashSpaces.Add(new CarWashSpace(i, ProcessState.Free, 79));
+            carWashSpaces.Add(new CarWashSpace(i, ProcessState.Free));
         }
     }
 
@@ -49,13 +51,20 @@ public class CarWash
                 {
                     tempSpace.State = state;
                     Task.Delay(2000).Wait();
-                    Console.Out.WriteLineAsync($"Car wash space {tempSpace.Id} is now {tempSpace.State} for {licensePlate}");
+                    await Console.Out.WriteLineAsync($"Car wash space {tempSpace.Id} is now {tempSpace.State} for {licensePlate}");
                 }
             }
             Task.Delay(2000).Wait();
             tempSpace.State = ProcessState.Free;
-            Console.Out.WriteLineAsync($"Car wash space {tempSpace.Id} is now {tempSpace.State}");
+            await Console.Out.WriteLineAsync($"Car wash space {tempSpace.Id} is now {tempSpace.State}");
         }
 
     }
+
+    public string AdjustWashingPrice(double price)
+    {
+        Price = price;
+        return $"Car wash price is now {Price:C}";
+    }
+
 }

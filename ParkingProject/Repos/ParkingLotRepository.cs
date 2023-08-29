@@ -9,7 +9,7 @@ namespace ParkingProject;
         IParkingSpace tempspace = parkingSpaces.FirstOrDefault(x => x.Type == parkingSpaceTypes && x.IsAvailable);
         if (tempspace != null)
         {
-            tempspace.IsAvailable = hasPurchasedCarWash;
+            tempspace.IsAvailable = false;
             tempspace.TimeTaken = DateTime.Now;
             tempspace.LicensePlate = licensePlate;
             tempspace.PurchasedCarWash = hasPurchasedCarWash;
@@ -29,7 +29,7 @@ namespace ParkingProject;
         double hours = Math.Ceiling(timeTaken.TotalHours);
         double totalCost = hours * tempSpace.Price;
         if (tempSpace.PurchasedCarWash) {
-            totalCost += parkingLot.CarWash.CarWashSpace.FirstOrDefault(x => x.Id == 0).Price;
+            totalCost += parkingLot.CarWash.Price;
         }
         parkingLot.ParkingSpaceList.Remove(tempSpace);
         return $"------ {parkingLot.Name} ------\nParking paid for: {licensePlate}\nHours parked: {hours}\nFee charged: {totalCost:C}\nPaid for car wash: {tempSpace.PurchasedCarWash}\n-------------------------";

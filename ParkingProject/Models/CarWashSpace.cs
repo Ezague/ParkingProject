@@ -1,4 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
+using ParkingProject.BLL;
+
 namespace ParkingProject.Models;
 
 public enum ProcessState
@@ -15,14 +17,12 @@ public class CarWashSpace
 {
     public required int Id { get; set; }
     public required ProcessState State { get; set; }
-    public required double Price { get; set; }
 
     [SetsRequiredMembers]
-    public CarWashSpace(int id, ProcessState state, double price)
+    public CarWashSpace(int id, ProcessState state)
 {
     Id = id;
     State = state;
-    Price = price;
 }
 
 }
