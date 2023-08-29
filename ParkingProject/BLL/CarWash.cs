@@ -50,11 +50,11 @@ public class CarWash
                 if (state != ProcessState.Free)
                 {
                     tempSpace.State = state;
-                    Task.Delay(2000).Wait();
+                    await Task.Delay(2000);
                     await Console.Out.WriteLineAsync($"Car wash space {tempSpace.Id} is now {tempSpace.State} for {licensePlate}");
                 }
             }
-            Task.Delay(2000).Wait();
+            await Task.Delay(2000);
             tempSpace.State = ProcessState.Free;
             await Console.Out.WriteLineAsync($"Car wash space {tempSpace.Id} is now {tempSpace.State}");
         }
