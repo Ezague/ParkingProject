@@ -36,6 +36,9 @@ internal class Program
                 case ConsoleKey.L:
                     ConsoleRepository.PayLease(parkingLot);
                     break;
+                case ConsoleKey.A:
+                    ConsoleRepository.PrintAdminMenu(parkingLot);
+                    break;
                 case ConsoleKey.X:
                     afslut = true;
                     break;

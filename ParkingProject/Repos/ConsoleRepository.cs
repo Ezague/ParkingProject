@@ -9,16 +9,16 @@ namespace ParkingProject.Repos;
 public class ConsoleRepository {
 
     public static void PrintMenu(ParkingLot parkingLot)
-        {
-            Console.WriteLine($"------ {parkingLot.Name} ------");
-            Console.WriteLine("P. Purchase parking space");
-            Console.WriteLine("B. Buy car wash");
-            Console.WriteLine("S. See spaces and prices");
-            Console.WriteLine("L. Pay lease");
-            Console.WriteLine("A. Admin menu");
-            Console.WriteLine("X. Exit");
-            Console.WriteLine("-------------------------");
-        }
+    {
+        Console.WriteLine($"------ {parkingLot.Name} ------");
+        Console.WriteLine("P. Purchase parking space");
+        Console.WriteLine("B. Buy car wash");
+        Console.WriteLine("S. See spaces and prices");
+        Console.WriteLine("L. Pay lease");
+        Console.WriteLine("A. Admin menu");
+        Console.WriteLine("X. Exit");
+        Console.WriteLine("-------------------------");
+    }
 
     public static void BuyParkingSpace(ParkingLot parkingLot)
     {
@@ -73,7 +73,7 @@ public class ConsoleRepository {
         Console.ReadKey(true);
     }
 
-    public static void WashCarAsync(ParkingLot parkingLot)
+    public static async Task WashCarAsync(ParkingLot parkingLot)
     {
         Console.Write("Enter license plate: ");
         string licensePlate = Console.ReadLine().ToUpper();
@@ -100,11 +100,71 @@ public class ConsoleRepository {
                 default: return;
             }
         }
-        parkingLot.CarWash.WashCarAsync(licensePlate);
+        await parkingLot.CarWash.WashCarAsync(licensePlate);
     }
 
-    public static void PrintAdminMenu()
+    public static void PrintAdminMenu(ParkingLot parkingLot)
     {
+        bool isLoggedIn = false;
+        string username = string.Empty;
+        Admin admin = new("admin", "1234");
 
+        for (int i = 2; i >= 0; i--)
+        {
+            Console.Clear();
+            Console.WriteLine("Admin menu - please log in");
+            Console.Write("Username: ");
+            username = Console.ReadLine();
+            Console.Write("Password: ");
+            string password = Console.ReadLine();
+
+            if (admin.IsLoggedIn(username, password))
+            {
+                isLoggedIn = true;
+                break;
+            }
+            else
+            {
+                Console.WriteLine($"Wrong usernamd or password, you have {i} tries left");
+                Console.ReadKey(true);
+            }
+        }
+        while (isLoggedIn)
+        {
+            Console.Clear();
+            Console.WriteLine($"------ Welcome {username} ------");
+            Console.WriteLine("Y. Adjust prices for parking spaces");
+            Console.WriteLine("C. Adjust price for car wash");
+            Console.WriteLine("X. Exit");
+            Console.WriteLine("-------------------------");
+
+            ConsoleKeyInfo valg = Console.ReadKey(true);
+            switch (valg.Key)
+            {
+                case ConsoleKey.Y:
+                    Console.Clear();
+                    throw new NotImplementedException();
+                    Console.ReadKey(true);
+                    break;
+                case ConsoleKey.C:
+                    Console.Clear();
+                    AdjustWashingPrices(parkingLot);
+                    Console.ReadKey(true);
+                    break;
+                case ConsoleKey.X:
+                    isLoggedIn = false;
+                    break;
+            }
+        }
+    }
+
+    public static void AdjustWashingPrices(ParkingLot parkingLot)
+    {
+        Console.Clear();
+        Console.WriteLine("Current price for car wash: {0:C}", parkingLot.CarWash.Price);
+        Console.Write("Enter new price: ");
+        double newPrice = double.TryParse(Console.ReadLine(), out newPrice) ? newPrice : parkingLot.CarWash.Price;
+        Console.WriteLine(parkingLot.CarWash.AdjustWashingPrice(newPrice));
+        Console.ReadKey(true);
     }
 }
