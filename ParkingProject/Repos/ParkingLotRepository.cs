@@ -8,18 +8,18 @@ namespace ParkingProject;
     {
         IParkingSpace tempspace;
         tempspace = parkingSpaces.Exists(x => x.LicensePlate == licensePlate) ? parkingSpaces.FirstOrDefault(x => x.LicensePlate == licensePlate) : parkingSpaces.FirstOrDefault(x => x.Type == parkingSpaceTypes && x.IsAvailable);
-        if (tempspace != null && tempspace.IsAvailable == true)
+        if (tempspace != null)
         {
+            if (tempspace.IsAvailable == false)
+            {
+                return "You already parked your car";
+            }
             tempspace.IsAvailable = false;
             tempspace.TimeTaken = DateTime.Now;
             tempspace.LicensePlate = licensePlate;
             tempspace.PurchasedCarWash = hasPurchasedCarWash;
             string availTemp = tempspace.PurchasedCarWash ? $"Bought for vehicle: {tempspace.LicensePlate}" : "Not bought";
             return $"Parking space leased for: {tempspace.LicensePlate}\nYour hourly rate is: {tempspace.Price:C}\nYour parking space ID is: {tempspace.Id}\nCarWash: {availTemp}";
-        }
-        if (tempspace != null && tempspace.IsAvailable == false)
-        {
-            return "You already parked your car";
         }
         else
         {
