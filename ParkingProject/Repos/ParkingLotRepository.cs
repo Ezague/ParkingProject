@@ -38,25 +38,25 @@ namespace ParkingProject;
         }
     }
 
-    public void AddParkingSpaces(List<IParkingSpace> parkingSpaces, int NumberOfSpaces)
+    public void AddParkingSpaces(List<IParkingSpace> parkingSpaces, int NumberOfSpaces, double[] parkingPrices)
     {
         for (int i = 0; i < NumberOfSpaces; i++)
         {
             if (i < 10)
             {
-                parkingSpaces.Add(new NormalParkingSpace(i, 12.00, true));
+                parkingSpaces.Add(new NormalParkingSpace(i, parkingPrices[0], true));
             }
             else if (i < 14)
             {
-                parkingSpaces.Add(new HandicapParkingSpace(i, 16.00, true));
+                parkingSpaces.Add(new HandicapParkingSpace(i, parkingPrices[1], true));
             }
             else if (i < 16)
             {
-                parkingSpaces.Add(new BusParkingSpace(i, 25.00, true));
+                parkingSpaces.Add(new BusParkingSpace(i, parkingPrices[2], true));
             }
             else
             {
-                parkingSpaces.Add(new MotorcycleParkingSpace(i, 5.00, true));
+                parkingSpaces.Add(new MotorcycleParkingSpace(i, parkingPrices[3], true));
             }
         }
     }

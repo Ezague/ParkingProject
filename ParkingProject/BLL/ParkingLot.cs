@@ -9,6 +9,7 @@ public class ParkingLot
     public required int Id { get; set; }
     public required Address Address { get; set; }
     public required string Name { get; set; }
+    public double[] ParkingPrices { get; set; }
     public required int NumberOfSpaces { get; set; }
     public List<IParkingSpace> ParkingSpaceList { get { return _parkingSpaces; }}
     public CarWash CarWash { get; init; }
@@ -24,10 +25,11 @@ public class ParkingLot
         Id = id;
         Address = address;
         Name = name;
+        ParkingPrices = new double[] { 12.00, 16.00, 25.00, 5.00 };
         ParkingLotRepository = parkingLotRepository;
         NumberOfSpaces = 20;
         _parkingSpaces = new List<IParkingSpace>();
-        ParkingLotRepository.AddParkingSpaces(_parkingSpaces, NumberOfSpaces);
+        ParkingLotRepository.AddParkingSpaces(_parkingSpaces, NumberOfSpaces, ParkingPrices);
         CarWash = new(1, "Wash if you're gay", 79);
     }
 }

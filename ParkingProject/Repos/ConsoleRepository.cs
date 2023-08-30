@@ -109,6 +109,7 @@ public class ConsoleRepository {
         string username = string.Empty;
         Admin admin = new("admin", "1234");
 
+        // Login logic
         for (int i = 2; i >= 0; i--)
         {
             Console.Clear();
@@ -129,6 +130,7 @@ public class ConsoleRepository {
                 Console.ReadKey(true);
             }
         }
+
         while (isLoggedIn)
         {
             Console.Clear();
@@ -142,19 +144,36 @@ public class ConsoleRepository {
             switch (valg.Key)
             {
                 case ConsoleKey.Y:
-                    Console.Clear();
-                    throw new NotImplementedException();
-                    Console.ReadKey(true);
+                    AdjustParkingPricesAsync(parkingLot);
                     break;
                 case ConsoleKey.C:
-                    Console.Clear();
                     AdjustWashingPrices(parkingLot);
-                    Console.ReadKey(true);
                     break;
                 case ConsoleKey.X:
                     isLoggedIn = false;
                     break;
             }
+        }
+    }
+
+    public static async Task AdjustParkingPricesAsync(ParkingLot parkingLot)
+    {
+        Console.Clear();
+        Console.Out.WriteLineAsync($"Current prices for parking lot: {parkingLot.Name}\nNormal space: {parkingLot.ParkingPrices[0]:C}\nHandicap space: {parkingLot.ParkingPrices[1]:C}\nBus space: {parkingLot.ParkingPrices[2]:C}\nMotorcycle space: {parkingLot.ParkingPrices[3]:C}");
+        Console.Out.WriteLineAsync("Select which price to adjust: 0. Normal, 1. Handicap, 2. Bus, 3. Motorcycle");
+        if (!int.TryParse(Console.ReadLine(), out int valg))
+        {
+            Console.WriteLine("Please select a valid choice");
+            Console.ReadKey(true);
+        }
+        else
+        {
+            Console.Out.WriteLineAsync("Enter new price: ");
+            double newPrice = double.TryParse(Console.ReadLine(), out newPrice) ? newPrice : parkingLot.ParkingPrices[valg];
+            foreach(IParkingSpace space in parkingLot.ParkingSpaceList.Where(x => x.Type == (ParkingSpaceTypes)valg)) space.Price = newPrice;
+            parkingLot.ParkingPrices[valg] = newPrice;
+            Console.Out.WriteLineAsync($"New price for {parkingLot.ParkingSpaceList[valg].Type} is now {parkingLot.ParkingPrices[valg]:C}");
+            Console.ReadKey(true);   
         }
     }
 
