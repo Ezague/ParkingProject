@@ -8,7 +8,7 @@ namespace ParkingProject;
 
 internal class Program
 {
-    static void Main(string[] args)
+    static async void Main(string[] args)
     {
         var services = new ServiceCollection()
             .AddSingleton<IParkingLotRepository, ParkingLotRepository>()
@@ -28,7 +28,7 @@ internal class Program
                     ConsoleRepository.BuyParkingSpace(parkingLot);
                     break;
                 case ConsoleKey.B:
-                    ConsoleRepository.WashCarAsync(parkingLot);
+                    await ConsoleRepository.WashCarAsync(parkingLot);
                     break;
                 case ConsoleKey.S:
                     ConsoleRepository.ShowSpacesAndPrices(parkingLot);
