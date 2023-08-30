@@ -159,7 +159,7 @@ public class ConsoleRepository {
     public static async Task AdjustParkingPricesAsync(ParkingLot parkingLot)
     {
         Console.Clear();
-        Console.Out.WriteLineAsync($"Current prices for parking lot: {parkingLot.Name}\nNormal space: {parkingLot.ParkingPrices[0]:C}\nHandicap space: {parkingLot.ParkingPrices[1]:C}\nBus space: {parkingLot.ParkingPrices[2]:C}\nMotorcycle space: {parkingLot.ParkingPrices[3]:C}");
+        Console.Out.WriteLineAsync($"Current prices for parking lot: {parkingLot.Name}\nNormal space: {parkingLot.ParkingPrices[0]:C}\nHandicap space: {parkingLot.ParkingPrices[1]:C}\nBus space: {parkingLot.ParkingPrices[2]:C}\nMotorcycle space: {parkingLot.ParkingPrices[3]:C}\n");
         Console.Out.WriteLineAsync("Select which price to adjust: 0. Normal, 1. Handicap, 2. Bus, 3. Motorcycle");
         if (!int.TryParse(Console.ReadLine(), out int valg))
         {
@@ -168,11 +168,16 @@ public class ConsoleRepository {
         }
         else
         {
-            Console.Out.WriteLineAsync("Enter new price: ");
+            Console.Out.WriteLineAsync($"Enter new price: ");
             double newPrice = double.TryParse(Console.ReadLine(), out newPrice) ? newPrice : parkingLot.ParkingPrices[valg];
-            foreach(IParkingSpace space in parkingLot.ParkingSpaceList.Where(x => x.Type == (ParkingSpaceTypes)valg)) space.Price = newPrice;
+            int i = 0;
+            foreach(IParkingSpace space in parkingLot.ParkingSpaceList.Where(x => x.Type == (ParkingSpaceTypes)valg && x.IsAvailable == true)) 
+            {
+                space.Price = newPrice;
+                i++;
+            }
             parkingLot.ParkingPrices[valg] = newPrice;
-            Console.Out.WriteLineAsync($"New price for {parkingLot.ParkingSpaceList[valg].Type} is now {parkingLot.ParkingPrices[valg]:C}");
+            Console.Out.WriteLineAsync($"New price for {parkingLot.ParkingSpaceList[valg].Type} is now {parkingLot.ParkingPrices[valg]:C}\nChanged price on {i} spaces");
             Console.ReadKey(true);   
         }
     }
