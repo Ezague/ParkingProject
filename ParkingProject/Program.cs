@@ -28,7 +28,7 @@ internal class Program
                     ConsoleRepository.BuyParkingSpace(parkingLot);
                     break;
                 case ConsoleKey.B:
-                    ConsoleRepository.WashCarAsync(parkingLot).Wait();
+                    ConsoleRepository.WashCar(parkingLot);
                     break;
                 case ConsoleKey.S:
                     ConsoleRepository.ShowSpacesAndPrices(parkingLot);

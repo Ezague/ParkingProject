@@ -39,12 +39,9 @@ namespace ParkingProject;
         if (tempSpace.PurchasedCarWash) {
             totalCost += parkingLot.CarWash.Price;
         }
-        tempSpace.IsAvailable = true;
-        tempSpace.TimeTaken = null;
-        tempSpace.LicensePlate = null;
-        tempSpace.PurchasedCarWash = false;
-        tempSpace.Price = parkingLot.ParkingPrices[(int) tempSpace.Type];
-        return $"------ {parkingLot.Name} ------\nParking paid for: {licensePlate}\nHours parked: {hours}\nFee charged: {totalCost:C}\nPaid for car wash: {tempSpace.PurchasedCarWash}\n-------------------------";
+        string returnMessage = $"------ {parkingLot.Name} ------\nParking paid for: {licensePlate}\nHours parked: {hours}\nFee charged: {totalCost:C}\nPaid for car wash: {tempSpace.PurchasedCarWash}\n-------------------------";
+        tempSpace.IsAvailable = true; tempSpace.TimeTaken = null; tempSpace.LicensePlate = null; tempSpace.PurchasedCarWash = false; tempSpace.Price = parkingLot.ParkingPrices[(int) tempSpace.Type];
+        return returnMessage;
         } else {
         return "No such license plate";
         }

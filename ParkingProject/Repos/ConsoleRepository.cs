@@ -73,7 +73,7 @@ public class ConsoleRepository {
         Console.ReadKey(true);
     }
 
-    public static async Task WashCarAsync(ParkingLot parkingLot)
+    public static void WashCar(ParkingLot parkingLot)
     {
         Console.Write("Enter license plate: ");
         string licensePlate = Console.ReadLine().ToUpper();
@@ -100,7 +100,7 @@ public class ConsoleRepository {
                 default: return;
             }
         }
-        await parkingLot.CarWash.WashCarAsync(licensePlate);
+        parkingLot.CarWash.WashCarAsync(licensePlate);
     }
 
     public static void PrintAdminMenu(ParkingLot parkingLot)
