@@ -2,6 +2,7 @@
 using ParkingProject.BLL;
 using ParkingProject.Models;
 using ParkingProject.Data;
+using ParkingProject.Repos;
 
 namespace ParkingProject;
 
@@ -27,10 +28,16 @@ internal class Program
                     ConsoleRepository.BuyParkingSpace(parkingLot);
                     break;
                 case ConsoleKey.B:
-                    ConsoleRepository.BuyCarWash();
+                    ConsoleRepository.WashCar(parkingLot);
                     break;
                 case ConsoleKey.S:
                     ConsoleRepository.ShowSpacesAndPrices(parkingLot);
+                    break;
+                case ConsoleKey.L:
+                    ConsoleRepository.PayLease(parkingLot);
+                    break;
+                case ConsoleKey.A:
+                    ConsoleRepository.PrintAdminMenu(parkingLot);
                     break;
                 case ConsoleKey.X:
                     afslut = true;
