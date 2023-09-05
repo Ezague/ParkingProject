@@ -5,7 +5,7 @@ Fuldt funktionelt dummy parkeringssystem, med integreret bilvask.
   * Kør programmet og følg instrukserne i terminalen.
 ### Features
 * P. Purchase parking space
-  * Mulighed for at leje en parkings plads af fire forskellige typer. 0. Normal, 1. Handicap, 2. Bus, 3. Motorcycle. Du skal indtaste køretøjets nummerplade samt type.
+  * Mulighed for at leje en parkerings plads af fire forskellige typer. 0. Normal, 1. Handicap, 2. Bus, 3. Motorcycle. Du skal indtaste køretøjets nummerplade samt type.
   * Mulighed for at tilkøbe en "billet" til parkeringspladsens bilvask.
 * B. Buy car wash
   * Mulighed for at købe bilvask til dit køretøj ved indtastning af nummerplade, hvis der tidligere er blevet valgt nej.
