@@ -1,7 +1,6 @@
 using ParkingProject.Models;
 using ParkingProject.Data;
 using ParkingProject.BLL;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ParkingProject;
     public class ParkingLotRepository : IParkingLotRepository
@@ -31,8 +30,10 @@ namespace ParkingProject;
     public string PayLease(string licensePlate, ParkingLot parkingLot) 
     {
         IParkingSpace tempSpace = parkingLot.ParkingSpaceList.FirstOrDefault(x => x.LicensePlate == licensePlate);
-
-        if (tempSpace != null) {
+        CarWashSpace tempCarWashSpace = parkingLot.CarWash.CarWashSpace.FirstOrDefault(x => x.LicensePlate == licensePlate);
+        if (tempSpace == null) return "No such license plate";
+        if (tempCarWashSpace != null) return "Car is in car wash";
+        if (tempSpace != null && tempCarWashSpace == null) {
         TimeSpan timeTaken = DateTime.Now - (DateTime) tempSpace.TimeTaken;
         double hours = Math.Ceiling(timeTaken.TotalHours);
         double totalCost = hours * tempSpace.Price;
@@ -43,7 +44,7 @@ namespace ParkingProject;
         tempSpace.IsAvailable = true; tempSpace.TimeTaken = null; tempSpace.LicensePlate = null; tempSpace.PurchasedCarWash = false; tempSpace.Price = parkingLot.ParkingPrices[(int) tempSpace.Type];
         return returnMessage;
         } else {
-        return "No such license plate";
+        return "Error";
         }
     }
 
