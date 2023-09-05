@@ -28,4 +28,4 @@ Fuldt funktionelt dummy parkeringssystem, med integreret bilvask.
 *
 
 ### Bug reporting
-*Oplever du fejl i programmet, er du velkommen til at raise et issue her på github, så jeg bliver underrettet om given fejl.
+* Oplever du fejl i programmet, er du velkommen til at raise et issue her på github, så jeg bliver underrettet om given fejl.
