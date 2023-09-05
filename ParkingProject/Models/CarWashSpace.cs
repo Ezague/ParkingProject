@@ -17,6 +17,7 @@ public class CarWashSpace
 {
     public required int Id { get; set; }
     public required ProcessState State { get; set; }
+    public string? LicensePlate { get; set; }
 
     [SetsRequiredMembers]
     public CarWashSpace(int id, ProcessState state)

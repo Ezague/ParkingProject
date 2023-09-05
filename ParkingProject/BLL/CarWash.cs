@@ -45,6 +45,7 @@ public class CarWash
         }
         else
         {
+            tempSpace.LicensePlate = licensePlate;
             foreach (ProcessState state in Enum.GetValues(typeof(ProcessState)))
             {
                 if (state != ProcessState.Free)
@@ -57,6 +58,7 @@ public class CarWash
             await Task.Delay(2000);
             tempSpace.State = ProcessState.Free;
             await Console.Out.WriteLineAsync($"Car wash space {tempSpace.Id} is now {tempSpace.State}");
+            tempSpace.LicensePlate = null;
         }
 
     }
