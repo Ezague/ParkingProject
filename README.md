@@ -23,7 +23,7 @@ Fuldt funktionelt dummy parkeringssystem, med integreret bilvask.
 ### ToDo List
   * Integrer database eller anden form for data lagring så programmet kan genstartes uden tab af data.
   * Tilføj en feature til admin menuen som gør det muligt at smide et køretøj væk fra parkeringspladsen.
-  * Bloker p-pladser af typen motorcykel fra at parkere på parkeringspladsen.
+  * Bloker p-pladser af typen motorcykel fra at købe en bilvask.
 ### Known Bugs
 *
 
