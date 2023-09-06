@@ -20,12 +20,18 @@ Fuldt funktionelt dummy parkeringssystem, med integreret bilvask.
     * Tilretning af priser på bilvask.
 * X. Exit
   * Forlad programmet.
-### ToDo List
+### ToDo Liste
   * Integrer database eller anden form for data lagring så programmet kan genstartes uden tab af data.
   * Tilføj en feature til admin menuen som gør det muligt at smide et køretøj væk fra parkeringspladsen.
   * Bloker p-pladser af typen motorcykel fra at købe en bilvask.
-### Known Bugs
+
+### Changelog
+  * 
+### Kendte bugs
 *
 
 ### Bug reporting
 * Oplever du fejl i programmet, er du velkommen til at [raise et issue](https://github.com/Ezague/ParkingProject/issues) her på github, så jeg bliver underrettet om given fejl.
+
+### Forfatter
+* [Ezague](https://github.com/Ezague)
